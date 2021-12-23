@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">davidakht</string>
+    <string name="about_1">∞David_Hartanto∞</string>
+    <string name="about_2">™Learn to Code™</string>
+    <string name="about_3">2021</string>
+    <string name="help_fragment1">Hello!</string>
+    <string name="help_fragment2">For further inquiries </string>
+    <string name="help_fragment3">Whatsapp Me (+628873819999)</string>
+    <string name="help_fragment4">Thanks!</string>
+    <string name="menu_tolong">Tolong</string>
+    <string name="menu_tentang">About Apps</string>
+    <string name="search_hint">Cari user Github</string>
+    <string name="UserAvatar">User Avatar</string>
+    <string name="username">Username</string>
+    <string name="name">Name</string>
+    <string name="tab_text_followers">Followers</string>
+    <string name="tab_text_following">Following</string>
+    <string name="content_tab_followers">Daftar Teman yang Mengikuti Anda</string>
+    <string name="content_tab_following">Daftar Teman yang Anda Ikuti</string>
+    <string name="search">Search</string>
+    <string name="my_name">David Hartanto</string>
+    <string name="btn_my_github">My Github</string>
+    <string name="repository">Repository: %1$s</string>
+    <string name="following">Following: %1$s</string>
+    <string name="followers">Followers: %1$s</string>
+    <string name="dark_mode">Dark Mode</string>
+</resources>

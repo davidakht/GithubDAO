@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import davidakht.githubdao.R
 import davidakht.githubdao.adapter.ListFavoriteUserAdapter
 import davidakht.githubdao.databinding.ActivityFavoriteUserBinding
+import davidakht.githubdao.datastore.SettingPreferences
 import davidakht.githubdao.userinterface.fragment.MenuFragment
 import davidakht.githubdao.viewmodel.FavoriteUserViewModel
 import davidakht.githubdao.viewmodel.ViewModelFactory
@@ -40,7 +41,9 @@ class FavoriteUserActivity : AppCompatActivity() {
     }
 
     private fun obtainViewModel(activity: AppCompatActivity): FavoriteUserViewModel {
-        val factory = ViewModelFactory.getInstance(activity.application)
+//        val factory = ViewModelFactory.getInstance(activity.application)
+        val pref =  SettingPreferences.getInstance(dataStore)
+        val factory = ViewModelFactory.getInstance(application, pref)
         return ViewModelProvider(activity, factory).get(FavoriteUserViewModel::class.java)
     }
 

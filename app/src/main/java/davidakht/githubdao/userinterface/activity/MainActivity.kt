@@ -8,11 +8,14 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.Button
+import android.widget.CompoundButton
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.SearchView
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
+import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.google.android.material.switchmaterial.SwitchMaterial
@@ -20,6 +23,9 @@ import davidakht.githubdao.R
 import davidakht.githubdao.databinding.ActivityMainBinding
 import davidakht.githubdao.datastore.SettingPreferences
 import davidakht.githubdao.userinterface.fragment.MenuFragment
+import davidakht.githubdao.viewmodel.DetailUserViewModel
+import davidakht.githubdao.viewmodel.MainViewModel
+import davidakht.githubdao.viewmodel.ViewModelFactory
 
 val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
 
@@ -34,24 +40,25 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         val btnShowFavorite: Button = findViewById(R.id.btnShowfavorite)
         btnMyGitHub.setOnClickListener(this)
         btnShowFavorite.setOnClickListener(this)
+        val mainViewModel = obtainViewModel(this@MainActivity)
         val switchTheme = findViewById<SwitchMaterial>(R.id.switch_theme)
         val pref = SettingPreferences.getInstance(dataStore)
-//        val mainViewModel = ViewModelProvider(this, ViewModelFactoryDataStore(pref)).get(
+//        val mainViewModel = ViewModelProvider(this, ViewModelFactory(pref)).get(
 //            MainViewModel::class.java
 //        )
-//        mainViewModel.getThemeSettings().observe(this,
-//            { isDarkModeActive: Boolean ->
-//                if (isDarkModeActive) {
-//                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-//                    switchTheme.isChecked = true
-//                } else {
-//                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-//                    switchTheme.isChecked = false
-//                }
-//            })
-//        switchTheme.setOnCheckedChangeListener { _: CompoundButton?, isChecked: Boolean ->
-//            mainViewModel.saveThemeSetting(isChecked)
-//        }
+        mainViewModel.getThemeSettings().observe(this,
+            { isDarkModeActive: Boolean ->
+                if (isDarkModeActive) {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                    switchTheme.isChecked = true
+                } else {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                    switchTheme.isChecked = false
+                }
+            })
+        switchTheme.setOnCheckedChangeListener { _: CompoundButton?, isChecked: Boolean ->
+            mainViewModel.saveThemeSetting(isChecked)
+        }
     }
 
     private fun getMyUser() {
@@ -117,5 +124,12 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 startActivity(myFavoriteIntent)
             }
         }
+    }
+
+    private fun obtainViewModel(activity: AppCompatActivity): MainViewModel {
+//    val factory = ViewModelFactory.getInstance(activity.application)
+        val pref =  SettingPreferences.getInstance(dataStore)
+        val factory = ViewModelFactory.getInstance(application, pref)
+        return ViewModelProvider(activity, factory).get(MainViewModel::class.java)
     }
 }

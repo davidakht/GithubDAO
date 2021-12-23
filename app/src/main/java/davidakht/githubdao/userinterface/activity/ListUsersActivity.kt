@@ -15,8 +15,11 @@ import davidakht.githubdao.R
 import davidakht.githubdao.adapter.ListUserAdapter
 import davidakht.githubdao.data.User
 import davidakht.githubdao.databinding.ActivityListUsersBinding
+import davidakht.githubdao.datastore.SettingPreferences
 import davidakht.githubdao.userinterface.fragment.MenuFragment
+import davidakht.githubdao.viewmodel.DetailUserViewModel
 import davidakht.githubdao.viewmodel.ListUserViewModel
+import davidakht.githubdao.viewmodel.ViewModelFactory
 
 class ListUsersActivity : AppCompatActivity() {
     companion object {
@@ -44,9 +47,10 @@ class ListUsersActivity : AppCompatActivity() {
                 }
             }
         })
-        viewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(
-            ListUserViewModel::class.java
-        )
+        viewModel = obtainViewModel(this@ListUsersActivity)
+//        viewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(
+//            ListUserViewModel::class.java
+//        )
         binding.apply {
             rvUser.layoutManager = LinearLayoutManager(this@ListUsersActivity)
             rvUser.setHasFixedSize(true)
@@ -100,5 +104,11 @@ class ListUsersActivity : AppCompatActivity() {
             }
             else -> true
         }
+    }
+    private fun obtainViewModel(activity: AppCompatActivity): ListUserViewModel {
+//    val factory = ViewModelFactory.getInstance(activity.application)
+        val pref =  SettingPreferences.getInstance(dataStore)
+        val factory = ViewModelFactory.getInstance(application, pref)
+        return ViewModelProvider(activity, factory).get(ListUserViewModel::class.java)
     }
 }

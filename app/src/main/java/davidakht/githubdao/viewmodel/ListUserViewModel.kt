@@ -1,8 +1,6 @@
 package davidakht.githubdao.viewmodel
 
-import android.app.Application
 import android.util.Log
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -13,8 +11,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-//class ListUserViewModel : ViewModel() {
-class ListUserViewModel (application: Application): AndroidViewModel(application)  {
+class ListUserViewModel : ViewModel() {
     val listUsers = MutableLiveData<ArrayList<User>>()
     fun setSearchUsers(query: String) {
         Retrofit2Github.apiInstance

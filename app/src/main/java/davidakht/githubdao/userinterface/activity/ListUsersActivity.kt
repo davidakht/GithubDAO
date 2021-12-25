@@ -15,16 +15,14 @@ import davidakht.githubdao.R
 import davidakht.githubdao.adapter.ListUserAdapter
 import davidakht.githubdao.data.User
 import davidakht.githubdao.databinding.ActivityListUsersBinding
-import davidakht.githubdao.datastore.SettingPreferences
 import davidakht.githubdao.userinterface.fragment.MenuFragment
-import davidakht.githubdao.viewmodel.DetailUserViewModel
 import davidakht.githubdao.viewmodel.ListUserViewModel
-import davidakht.githubdao.viewmodel.ViewModelFactory
 
 class ListUsersActivity : AppCompatActivity() {
     companion object {
         const val EXTRA_QUERY = "extra_query"
     }
+
     private lateinit var binding: ActivityListUsersBinding
     private lateinit var viewModel: ListUserViewModel
     private lateinit var adapter: ListUserAdapter
@@ -41,16 +39,13 @@ class ListUsersActivity : AppCompatActivity() {
             override fun onItemClicked(data: User) {
                 Intent(this@ListUsersActivity, DetailUserActivity::class.java).also {
                     it.putExtra(DetailUserActivity.EXTRA_USERNAME, data.login)
-                    it.putExtra(DetailUserActivity.EXTRA_ID,data.id)
-                    it.putExtra(DetailUserActivity.EXTRA_AVATARURL,data.avatar_url)
+                    it.putExtra(DetailUserActivity.EXTRA_ID, data.id)
+                    it.putExtra(DetailUserActivity.EXTRA_AVATARURL, data.avatar_url)
                     startActivity(it)
                 }
             }
         })
-        viewModel = obtainViewModel(this@ListUsersActivity)
-//        viewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(
-//            ListUserViewModel::class.java
-//        )
+        viewModel = ViewModelProvider(this).get(ListUserViewModel::class.java)
         binding.apply {
             rvUser.layoutManager = LinearLayoutManager(this@ListUsersActivity)
             rvUser.setHasFixedSize(true)
@@ -66,6 +61,7 @@ class ListUsersActivity : AppCompatActivity() {
             viewModel.setSearchUsers(query)
         }
     }
+
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         val inflater = menuInflater
         inflater.inflate(R.menu.option_menu, menu)
@@ -88,6 +84,7 @@ class ListUsersActivity : AppCompatActivity() {
         })
         return true
     }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.help -> {
@@ -104,11 +101,5 @@ class ListUsersActivity : AppCompatActivity() {
             }
             else -> true
         }
-    }
-    private fun obtainViewModel(activity: AppCompatActivity): ListUserViewModel {
-//    val factory = ViewModelFactory.getInstance(activity.application)
-        val pref =  SettingPreferences.getInstance(dataStore)
-        val factory = ViewModelFactory.getInstance(application, pref)
-        return ViewModelProvider(activity, factory).get(ListUserViewModel::class.java)
     }
 }

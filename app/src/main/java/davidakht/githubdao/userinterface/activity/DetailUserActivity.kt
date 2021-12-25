@@ -114,7 +114,6 @@ class DetailUserActivity : AppCompatActivity() {
         }
     }
     private fun obtainViewModel(activity: AppCompatActivity): DetailUserViewModel {
-//    val factory = ViewModelFactory.getInstance(activity.application)
         val pref =  SettingPreferences.getInstance(dataStore)
         val factory = ViewModelFactory.getInstance(application, pref)
         return ViewModelProvider(activity, factory).get(DetailUserViewModel::class.java)

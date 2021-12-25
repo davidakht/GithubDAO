@@ -12,13 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GithubAPI">
         <activity
-            android:name=".userinterface.activity.FavoriteUserActivity"
-            android:exported="false" />
-        <activity
-            android:name=".userinterface.activity.DetailFavoriteUserActivity"
-            android:exported="false" />
-        <activity
-            android:name=".userinterface.activity.MainActivity"
+            android:name=".userinterface.activity.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,8 +21,18 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".userinterface.activity.FavoriteUserActivity"
+            android:exported="false" />
+        <activity
+            android:name=".userinterface.activity.DetailFavoriteUserActivity"
+            android:exported="false" />
+        <activity
+            android:name=".userinterface.activity.MainActivity"
+            android:exported="true">
+        </activity>
+        <activity
             android:name=".userinterface.activity.ListUsersActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".userinterface.activity.MenuActivity"
             android:exported="false" />

@@ -32,7 +32,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:textColor="@color/black"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/img_avatar"
@@ -57,7 +56,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginBottom="16dp"
-            android:textColor="@color/black"
             android:textSize="14sp"
             tools:text="Username" />
 
@@ -67,7 +65,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginBottom="16dp"
-            android:textColor="@color/black"
             android:textSize="14sp"
             tools:text="Location" />
 
@@ -77,7 +74,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginBottom="16dp"
-            android:textColor="@color/black"
             android:textSize="14sp"
             tools:text="Company" />
 
@@ -99,7 +95,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginBottom="16dp"
-            android:textColor="@color/black"
             android:textSize="14sp"
             tools:text="# Repository" />
 
@@ -109,7 +104,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginBottom="16dp"
-            android:textColor="@color/black"
             android:textSize="14sp"
             tools:text="# Following" />
 
@@ -119,7 +113,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginBottom="16dp"
-            android:textColor="@color/black"
             android:textSize="14sp"
             tools:text="# Followers" />
 

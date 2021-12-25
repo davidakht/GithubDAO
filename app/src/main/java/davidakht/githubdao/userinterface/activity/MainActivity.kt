@@ -23,7 +23,6 @@ import davidakht.githubdao.R
 import davidakht.githubdao.databinding.ActivityMainBinding
 import davidakht.githubdao.datastore.SettingPreferences
 import davidakht.githubdao.userinterface.fragment.MenuFragment
-import davidakht.githubdao.viewmodel.DetailUserViewModel
 import davidakht.githubdao.viewmodel.MainViewModel
 import davidakht.githubdao.viewmodel.ViewModelFactory
 
@@ -43,9 +42,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         val mainViewModel = obtainViewModel(this@MainActivity)
         val switchTheme = findViewById<SwitchMaterial>(R.id.switch_theme)
         val pref = SettingPreferences.getInstance(dataStore)
-//        val mainViewModel = ViewModelProvider(this, ViewModelFactory(pref)).get(
-//            MainViewModel::class.java
-//        )
         mainViewModel.getThemeSettings().observe(this,
             { isDarkModeActive: Boolean ->
                 if (isDarkModeActive) {
@@ -127,8 +123,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun obtainViewModel(activity: AppCompatActivity): MainViewModel {
-//    val factory = ViewModelFactory.getInstance(activity.application)
-        val pref =  SettingPreferences.getInstance(dataStore)
+        val pref = SettingPreferences.getInstance(dataStore)
         val factory = ViewModelFactory.getInstance(application, pref)
         return ViewModelProvider(activity, factory).get(MainViewModel::class.java)
     }
